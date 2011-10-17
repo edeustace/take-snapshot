@@ -2,7 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="com.ee.toolbox.snapshot.SnapshotMixin"/>
-    <classEntry path="com.ee.toolbox.snapshot.ChooseSnapshotTarget"/>
+    <classEntry path="com.ee.toolbox.snapshot.ChooseTargetWindow"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

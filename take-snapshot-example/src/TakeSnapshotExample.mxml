@@ -3,10 +3,10 @@
 <s:Application name="Spark_Application_Scroller_test"
 			   xmlns:fx="http://ns.adobe.com/mxml/2009"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:mx="library://ns.adobe.com/flex/mx">
-	<s:controlBarContent>
+			   xmlns:mx="library://ns.adobe.com/flex/mx">  
+	<s:controlBarContent>  
 		<s:Label text="Rect height (px):" />
-		<s:HSlider id="sl" minimum="100" maximum="1000" value="300" />
+		<s:HSlider id="sl" minimum="100" maximum="1000" value="300" /> 
 	</s:controlBarContent>
 	
 	<s:Rect top="20" horizontalCenter="0" width="50%" height="{sl.value}">

@@ -52,7 +52,7 @@ package com.ee.toolbox.snapshot
 
         private function handleContextMenuItemSelect(event:ContextMenuEvent):void
         {
-			var popup:ChooseSnapshotTarget = new ChooseSnapshotTarget();
+			var popup:ChooseTargetWindow = new ChooseTargetWindow();
             popup.target = event.mouseTarget;
             PopUpManager.addPopUp(popup, FlexGlobals.topLevelApplication as DisplayObject, true);
             PopUpManager.centerPopUp(popup);
