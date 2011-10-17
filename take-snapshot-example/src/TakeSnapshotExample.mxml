@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://blog.flexexamples.com/2010/11/03/adding-scroll-bars-to-an-spark-application-container-in-flex-4/ -->
+<s:Application name="Spark_Application_Scroller_test"
+			   xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<s:controlBarContent>
+		<s:Label text="Rect height (px):" />
+		<s:HSlider id="sl" minimum="100" maximum="1000" value="300" />
+	</s:controlBarContent>
+	
+	<s:Rect top="20" horizontalCenter="0" width="50%" height="{sl.value}">
+		<s:fill>
+			<s:LinearGradient rotation="45">
+				<s:GradientEntry color="red" />
+				<s:GradientEntry color="haloOrange" />
+				<s:GradientEntry color="yellow" />
+				<s:GradientEntry color="haloGreen" />
+				<s:GradientEntry color="haloBlue" />
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	
+</s:Application>

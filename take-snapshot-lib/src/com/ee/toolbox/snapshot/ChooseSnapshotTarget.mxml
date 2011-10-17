@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:TitleWindow 
+<s:TitleWindow 
     width="700" height="300"
-    layout="vertical"
-    xmlns:mx="http://www.adobe.com/2006/mxml">
-    <mx:Script>
+    xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s="library://ns.adobe.com/flex/spark">
+  
+	<mx:Script>
         <![CDATA[
             import mx.core.IUIComponent;
             import mx.graphics.ImageSnapshot;
@@ -21,7 +21,6 @@
             {
                 _target = value;
                 targetName = _target.toString();
-                trace(value);
             }
 
             [Bindable]
@@ -53,21 +52,6 @@
                 file.addEventListener(Event.COMPLETE, onFileSaveComplete);
             }
 
-            private function onPrintClick(event:MouseEvent):void
-            {
-                var printJob:FlexPrintJob = new FlexPrintJob();
-
-                // Start the print job.
-                if (printJob.start() != true)
-                    return;
-
-                // Add the object to print. Do not scale it.
-                printJob.addObject(target as IUIComponent, FlexPrintJobScaleType.NONE);
-
-                // Send the job to the printer.
-                printJob.send();
-            }
-
             private function onFileSaveComplete(event:Event):void
             {
                 closePopup();
@@ -79,21 +63,20 @@
             }
         ]]>
     </mx:Script>
-    <mx:Label text="{targetName}"/>
-    <mx:ControlBar>
-
-        <mx:Button 
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+    <s:Label text="{targetName}"/>
+	<s:controlBarContent>
+        <s:Button 
             label="up"
             click="onUpClick(event)"/>
-        <mx:Spacer width="100%"/>
-        <mx:Button 
+        <s:Spacer width="100%"/>
+        <s:Button 
             label="image"
             click="onImageClick(event)"/>
-        <mx:Button 
-            label="print"
-            click="onPrintClick(event)"/>
-        <mx:Button 
+        <s:Button 
             label="cancel"
             click="closePopup()"/>
-    </mx:ControlBar>
-</mx:TitleWindow>
+	</s:controlBarContent>
+</s:TitleWindow>

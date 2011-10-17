@@ -6,8 +6,9 @@ package com.ee.toolbox.snapshot
     import flash.events.Event;
     import flash.ui.ContextMenu;
     import flash.ui.ContextMenuItem;
-
+    
     import mx.core.Application;
+    import mx.core.FlexGlobals;
     import mx.events.FlexEvent;
     import mx.managers.ISystemManager;
     import mx.managers.PopUpManager;
@@ -51,12 +52,9 @@ package com.ee.toolbox.snapshot
 
         private function handleContextMenuItemSelect(event:ContextMenuEvent):void
         {
-
-            trace("handleContextMenuItemSelect");
-
-            var popup:ChooseSnapshotTarget = new ChooseSnapshotTarget();
+			var popup:ChooseSnapshotTarget = new ChooseSnapshotTarget();
             popup.target = event.mouseTarget;
-            PopUpManager.addPopUp(popup, Application.application as DisplayObject, true);
+            PopUpManager.addPopUp(popup, FlexGlobals.topLevelApplication as DisplayObject, true);
             PopUpManager.centerPopUp(popup);
         }
     }
