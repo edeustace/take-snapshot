@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow 
+    width="700" height="300"
+    layout="vertical"
+    xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Script>
+        <![CDATA[
+            import mx.core.IUIComponent;
+            import mx.graphics.ImageSnapshot;
+            import mx.graphics.codec.PNGEncoder;
+            import mx.managers.PopUpManager;
+            import mx.printing.FlexPrintJob;
+            import mx.printing.FlexPrintJobScaleType;
+
+            private var _target:InteractiveObject;
+
+            [Bindable]
+            private var targetName:String;
+
+            public function set target(value:InteractiveObject):void
+            {
+                _target = value;
+                targetName = _target.toString();
+                trace(value);
+            }
+
+            [Bindable]
+            public function get target():InteractiveObject
+            {
+                return _target;
+            }
+
+            protected function onUpClick(event:MouseEvent):void
+            {
+                target = target.parent;
+            }
+
+            protected function onImageClick(event:MouseEvent):void
+            {
+                if (!target is IUIComponent)
+                {
+                    closePopup();
+                    return;
+                }
+                var imageSnap:ImageSnapshot = ImageSnapshot.captureImage(target, 72, new PNGEncoder(), false);
+                var file:FileReference = new FileReference();
+
+                var now:Date = new Date();
+
+                var dateString:String = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
+                file.save(imageSnap.data, "snapshot_ " + dateString + ".png");
+
+                file.addEventListener(Event.COMPLETE, onFileSaveComplete);
+            }
+
+            private function onPrintClick(event:MouseEvent):void
+            {
+                var printJob:FlexPrintJob = new FlexPrintJob();
+
+                // Start the print job.
+                if (printJob.start() != true)
+                    return;
+
+                // Add the object to print. Do not scale it.
+                printJob.addObject(target as IUIComponent, FlexPrintJobScaleType.NONE);
+
+                // Send the job to the printer.
+                printJob.send();
+            }
+
+            private function onFileSaveComplete(event:Event):void
+            {
+                closePopup();
+            }
+
+            private function closePopup():void
+            {
+                PopUpManager.removePopUp(this);
+            }
+        ]]>
+    </mx:Script>
+    <mx:Label text="{targetName}"/>
+    <mx:ControlBar>
+
+        <mx:Button 
+            label="up"
+            click="onUpClick(event)"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button 
+            label="image"
+            click="onImageClick(event)"/>
+        <mx:Button 
+            label="print"
+            click="onPrintClick(event)"/>
+        <mx:Button 
+            label="cancel"
+            click="closePopup()"/>
+    </mx:ControlBar>
+</mx:TitleWindow>
